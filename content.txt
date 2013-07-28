@@ -1,0 +1,227 @@
+1
+
+Welcome to the talk
+
+2
+
+Intros of everyone
+
+3
+
+Here's a list of all the topics we're covering today - obviously we're not going to go into too much depth with all of them . This is more to give you a taste of the angular way of thinking and what angular has to offer
+
+Hopefully some of it sticks, and you'll start to love angular the way we do
+
+4
+
+What is angular? Angular is a Javascript framework for creating great web applications that are really well structured & organized
+
+It has a pretty unique approach for constructing these apps - 
+
+5
+
+Here are some of the ways it's unique - obviously there are a lot of things different about it, these are just a few of the ones that we feel are important
+
+It extends the HTML vocabularly so that you are creating your own HTML elements that have custom functionality
+
+Unlike other Javascript frameworks, angular reduces the amount of DOM manipulation so that you can focus on your business logic
+
+And finally, beause of the way you structure your applications, your code is way more testable - and you're going to find yourself writing plenty of unit tests for your Javascript app
+
+6
+
+So let's start with reducing DOM manipulation .. And to show you how it does, we'll first describe how it's done in other frameworks
+
+You've probably seen MVC - it's a pretty standard approach - you have a model, and you have a view. The glue in between the two is the controller
+
+7
+
+Typically, the controller is the bit that listens on UI events, and responds to them by updating the UI using jQuery, or just directly manipulating the DOM. And for good measure, they also deal with the business logic. It can get pretty messy pretty quickly
+
+8
+
+In angular, the controllers have a more purpose driven life. And it's a pretty simple purpose - they just create and update the view model
+
+What's the view model?
+
+9
+
+
+The view-model is a simpler model that's tailor fit to be visualized by a view. In MVVM then, the contorller's job is to take the model and simplify it into this simpler view model. You can see then in angular, the controller is much smaller
+
+10
+
+So let's look at what the view model looks like:
+
+In angular, the view model is called the Scope, and it's just a simple Javascript object
+
+Here we're adding a couple of bits of data to the scope
+
+This is what an angular controller would do -
+
+And in fact, that's all you would expect to see in an angular controller - no dom manipulation, no event handling, just setting up and managing the scope, aka the view model
+
+11
+
+And now lets see how to bind the view model to the view
+
+12
+
+And let's see it live
+
+Notice there are no event handlers, there's no dom manipulation - it's all done declaratively
+
+There's one part of this that we haven't covered yet and that's the ng-model
+
+What's ng-model? it's a directive
+
+13
+
+Let's talk about directives
+
+Directives are a way to teach HTML new tricks - it's a way to extend the HTML vocabularly by introducing new elements, or attributes
+
+We'll talk aout how to add your own directives later but for now, we'll show you a few built-in directives that angular provides
+
+ng-model binds the value of an input field - such as a text field - to the 
+
+ng-show shows or hides the element based on the value that the expression specified inside the ng-show attribute evaluates to
+
+ng-repeat treats the element on which it is declared on as a template, and clones that element once per each item in the list which you are repeating on
+
+14
+
+Let's take a look at those directives working live
+
+15
+
+Hopefully with bindings and directives, you've started to see one of the philosophical beliefs in angular: Declarative is better than imperative for constructing UIs
+
+If you start with the belief that HTML is a great declartive language for static documents, Angular adds enough so that HTML becomes a great declarative language for dynamic web applications
+
+
+16
+
+
+So imagine being able to do something lik this:
+
+
+You declare a grid, and it creates all the DOM necessary for showing a grid. It sets up all the necessary glue so that the data model specified here is bound to the grid that is visualized
+
+You can re-use this grid anywhere you need a grid
+
+It's more readable, easier to understand and more elegant
+
+With angular, these are directives
+
+But we just wanted to mention that this isn't just about angular - this approach to create re-usable dynaimc web components using HTML's declarative style is probably going to be the future
+
+At least if you are to believe a few at Google who are working on the next generation of web frameworks
+
+
+Polymer
+
+
+
+
+
+
+
+
+
+23
+
+Testing your angular application is easier than thought and makes you aware of potential code failures.
+
+Angular comes with support for unit and e2e testing. e2e stands for end2end and is used for testing business logic.
+
+Jasmine, a javascript testing framework, can be used for unit testing. With Jasmine you can test the behaviour of your controllers, services, filters & directives.
+
+The angular team has built an angular scenario runner for the e2e tests, which simulates user interactions (no selenium needed).
+
+24
+
+Angular is written with testability in mind, but it's up to the developer to do the right thing.
+
+Separation of code is important for testability, you don't want to end up with one method handling everything.
+
+Testing will force you to break-up code to be single purposed, so code behaviour can be tested separately.
+
+25
+
+Some functions you want to test might rely on service calls or other slow dependencies.
+
+To resolve that, you can mock dependencies through DI to avoid latency.
+
+You should only test how YOUR function works with a dependency.
+
+example: XHR object mock
+
+26
+
+Here we have a sample todo app written with angular.
+
+We are going to have a closer look into the addTodo function for the todoController.
+
+27
+
+applications grow in size and complexity, it gets very unrealistic and unreliable to test business logic manually.
+
+The angular team built an angular scenario runner, which simulates user interactions.
+
+tests describe how your application should behave, given a certain interaction in a specific state.
+
+28
+
+Back to the todo example, let's have a look what an e2e test could look like.
+
+Here we are testing on a higher level basis, views are rendered and we test in terms of DOM manipulation.
+
+These tests can be opened in any browser to check cross-browser compatibility
+
+29
+
+Ok, how to use animations in angular. For people coming from a jQuery background might have a hart time adapting.
+
+Because of bindings and little code (or none) for DOM manipulation, where do I put my animation code?
+
+Wouldn't it be nice to define animations on event basis?
+
+The angular team introduced a new directive handling this concern, the ng-animate directive
+
+30
+
+With ng-animate you can define animations with several different directives, ng-repeat, ng-view, ng-show, ng-hide, etc
+
+These animations can be defined in CSS3 or in Javascript code, even jQuery if needed.
+
+31
+
+In this example we use CSS to define our animation.
+
+the prefix block is the name of the animation, the suffix -enter and -leave define the action of the animation.
+with -active you define properties on how it should end (end state)
+
+Let' have a look what that looks like in action
+
+32
+
+So this works all through CSS3 transitions and angular will correctly add and remove the css classes in the right time.
+
+The nice thing is all your animation handling is outside your JS code, which also means your code should be even more testable.
+
+everything is happening through bindings and you have to worry less about updating your view.
+
+33
+
+For people who prefer using jQuery or other JS UI based libraries can do so too. Not every browser can handle CSS3
+
+In this example we define an animation module and use the animation method to do what we did in CSS, just through Javascript
+
+34
+
+ng-animate can be used on any element in combination with ng-show, ng-hide, ng-repeat, and more.
+
+There will be support to introduce new events like -enter and -leave with your own directives.
+
+This is very simple and awesome!

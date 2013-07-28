@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row-fluid" ng-controller="DirectivesDemoController">
+    <div class="page-header">
+      <h1>Directives</h1>
+    </div>
+
+    <input type="text" value="0" ng-model="count"><br />
+    <h3>Count: {{count}}</h3>
+
+    <ul ng-show="count > 0">
+      <li ng-repeat="item in items">Item #{{item.index}}</li>
+    </ul>
+    
+  </div>
+</div>
